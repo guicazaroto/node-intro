@@ -2,23 +2,24 @@ const express = require('express')
 const app = express()
 const path = require('path')
 
-const productsRoutes = require('./routes/shop')
-const adminData = require('./routes/admin')
+const shopRoutes = require('./routes/shop')
+const adminRoutes = require('./routes/admin')
 
-// Parser configs
-// app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(express.static(path.join(__dirname, 'public')))
 
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '/views'));
+
 // Express routes
-app.use(productsRoutes)
-app.use('/admin', adminData.routes)
+app.use(shopRoutes)
+app.use('/admin', adminRoutes)
 
 // Express Middlewares
 // 404 page
 app.use((req, res) => {
   res.status(404)
-    .sendFile(path.join(__dirname, 'view', '404.html'))
+    .render('404')
 })
 
 module.exports = app

@@ -14,5 +14,8 @@
     </ul>  
   </header>
   <h1>Lista de produtos</h1>
+  <% for (let item of products) { %>
+    <li><%= item.title %></li>
+  <% } %>  
 </body>
 </html>
