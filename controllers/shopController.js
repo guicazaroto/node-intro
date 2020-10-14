@@ -1,5 +1,6 @@
-const adminData = require('../controllers/adminController')
+const Product = require('../models/product')
 
-exports.index = (req, res) => {
-  return res.render('shop', { products: adminData.products })
+exports.index = async (req, res) => {
+  const list = await Product.fetchAll()
+  return res.render('shop', { products: list })
 }

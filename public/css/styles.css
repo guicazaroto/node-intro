@@ -1,6 +1,10 @@
 body {
   margin: 0;
 }
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
 .menu {
   box-sizing: border-box;
   margin-top: 0;

@@ -1,6 +1,8 @@
 <%- include('partials/header', { page: 'All Products' }) %>
-  <h1>Lista de produtos</h1>
-  <% for (let item of products) { %>
-    <li><%= item.title %></li>
-  <% } %>  
+  <div class="container">
+    <h1>Lista de produtos</h1>
+    <% for (let item of products) { %>
+      <li><%= item.title %></li>
+    <% } %>  
+  </div>
 <%- include('partials/footer') %>
