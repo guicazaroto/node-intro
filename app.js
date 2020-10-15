@@ -6,10 +6,10 @@ const shopRoutes = require('./routes/shop')
 const adminRoutes = require('./routes/admin')
 
 app.use(express.urlencoded({ extended: true }))
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static('public'))
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, '/views'));
+app.set('view engine', 'ejs')
+app.set('views', 'views')
 
 // Express routes
 app.use(shopRoutes)

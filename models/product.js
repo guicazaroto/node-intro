@@ -1,9 +1,15 @@
+// Packages
 const fs = require('fs');
 const path = require('path')
 const util = require('util');
 const readFile = util.promisify(fs.readFile);
 const writeFile = util.promisify(fs.writeFile);
 
+// Helper Functions
+const filePath = path.join(process.cwd(), 'storage', 'database.json')
+const readFilePath = async () => {
+  return await readFile(filePath)
+}
 
 let products = []
 
@@ -13,19 +19,23 @@ class Products {
   }
 
   async save () {
-    products.push(this)
     try {
-      const filePath = path.join(process.cwd(), 'storage', 'database.json')
-      const res = await writeFile(filePath, JSON.stringify(products))
+      await this.addProduct()
+      await writeFile(filePath, JSON.stringify(products))
     } catch (err) {
       console.log(err)
     }
   }
 
+  async addProduct () {
+    const res = await readFilePath()
+    products = JSON.parse(res)
+    products.push(this)
+  }
+
   static async fetchAll () {
     try {
-      const filePath = path.join(process.cwd(), 'storage', 'database.json')
-      const res = await readFile(filePath)
+      const res = await readFilePath()
       products = JSON.parse(res)
     } catch (err) {
       console.log(err)
