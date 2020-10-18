@@ -5,7 +5,12 @@ exports.index = (req, res) => {
 }
 
 exports.addProduct = (req, res) => {
-  const item = new Product(req.body.product)
+  const { title, img, price } = req.body
+  const item = new Product(title, img, price)
   item.save()
   res.redirect('/')
+}
+
+exports.editProduct = (req, res) => {
+  res.render('admin/edit-product')
 }

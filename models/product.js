@@ -14,8 +14,10 @@ const readFilePath = async () => {
 let products = []
 
 class Products {
-  constructor (title) {
+  constructor (title, img, price) {
     this.title = title
+    this.img = img
+    this.price = price
   }
 
   async save () {

@@ -2,7 +2,13 @@
   <div class="container my-3">
     <h1>Lista de produtos</h1>
     <% for (let item of products) { %>
-      <li><%= item.title %></li>
-    <% } %>  
+      <div class="card" style="width: 15rem;">
+        <img src="<%= item.img %>" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-title"><%= item.title %></h5>
+          <p>$ <%= item.price %></p>
+        </div>
+      </div>
+  <% } %>  
   </div>
 <%- include('../partials/footer') %>
