@@ -1,14 +1,17 @@
 <%- include('../partials/header', { page: 'All Products', path: 'shop' }) %>
   <div class="container my-3">
     <h1>Lista de produtos</h1>
-    <% for (let item of products) { %>
-      <div class="card" style="width: 15rem;">
-        <img src="<%= item.img %>" class="card-img-top">
-        <div class="card-body">
-          <h5 class="card-title"><%= item.title %></h5>
-          <p>$ <%= item.price %></p>
+    <div class="row d-flex justify-content-around my-5">
+      <% for (let item of products) { %>
+        <div class="card col-md-3" style="width: 15rem;">
+          <img src="<%= item.img %>" class="card-img-top">
+          <div class="card-body">
+            <h5 class="card-title"><%= item.title %></h5>
+            <p>$ <%= item.price %></p>
+            <a class="btn btn-info" href="/product/<%= item.id %>">Detalhes</a>
+          </div>
         </div>
-      </div>
-  <% } %>  
+    <% } %>  
+    </div>
   </div>
 <%- include('../partials/footer') %>

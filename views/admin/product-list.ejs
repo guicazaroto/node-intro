@@ -1,0 +1,22 @@
+<%- include('../partials/header', { page: 'Product List', path: 'product-list' }) %>
+<div class="container">
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <th>id</th>
+      <th>produto</th>
+      <th>ações</th>
+    </thead>
+    <tbody>
+      <% for (let item of list) { %>
+      <tr>
+        <td><%= item.id %></td>
+        <td><%= item.title %></td>
+        <td>
+          <a href="/admin/edit-product/<%= item.id %>" class="btn btn-info">editar</a>
+        </td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+</div>
+<%- include('../partials/footer') %>

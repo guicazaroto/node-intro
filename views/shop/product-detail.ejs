@@ -1,2 +1,22 @@
 <%- include('../partials/header', { page: 'Product Detail', path: 'detail' }) %>
+<div class="container">
+  <div class="row mb-5">
+    <div class="col-md-6">
+      <h1><%= product.title %></h1>
+      <h4>$ <%= product.price %></h4>
+      <div class="card">
+        <img src="<%= product.img %>" width="100%">
+      </div>
+      <p>
+        <%= product.description %>
+      </p>
+      <form action="/add-to-cart" method="POST">
+        <button class="btn btn-success" type="submit">Comprar</button>
+        <input name="productId" type="hidden" value="<%= product.id %>">
+      </form>
+    </div>
+  </div>
+
+  </div>
+</div>
 <%- include('../partials/footer') %>

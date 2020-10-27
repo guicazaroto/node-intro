@@ -14,10 +14,12 @@ const readFilePath = async () => {
 let products = []
 
 class Products {
-  constructor (title, img, price) {
+  constructor (title, img, price, description) {
+    this.id = Math.floor(Math.random() * 100)
     this.title = title
     this.img = img
     this.price = price
+    this.description = description
   }
 
   async save () {
@@ -43,6 +45,12 @@ class Products {
       console.log(err)
     }
     return products
+  }
+
+  static async getProduct (id) {
+    const list = await this.fetchAll()
+    const product = list.find(x => x.id === Number(id))
+    return product
   }
 }
 
