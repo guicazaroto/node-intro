@@ -11,8 +11,11 @@
       <tr>
         <td><%= item.id %></td>
         <td><%= item.title %></td>
-        <td>
-          <a href="/admin/edit-product/<%= item.id %>" class="btn btn-info">editar</a>
+        <td class="d-flex">
+          <a href="/admin/edit-product/<%= item.id %>" class="btn btn-info mr-1">editar</a>
+          <form method="POST" action="/admin/remove-product/<%= item.id %>">
+            <button type="submit" class="btn btn-danger">remover</button>
+          </form>
         </td>
       </tr>
       <% } %>

@@ -22,6 +22,16 @@ class Products {
     this.description = description
   }
 
+  static async fetchAll () {
+    try {
+      const res = await readFilePath()
+      products = JSON.parse(res)
+    } catch (err) {
+      console.log(err)
+    }
+    return products
+  }
+
   async save () {
     try {
       await this.addProduct()
@@ -37,20 +47,40 @@ class Products {
     products.push(this)
   }
 
-  static async fetchAll () {
+  static async getProduct (id) {
+    const list = await this.fetchAll()
+    const product = list.find(x => x.id === id)
+    return product
+  }
+
+  static async updateProduct (id, data) {
+    const index = await this.getProductIndex(id)
+    products[index] = { id, ...data }
+
     try {
-      const res = await readFilePath()
-      products = JSON.parse(res)
+      await writeFile(filePath, JSON.stringify(products))
     } catch (err) {
       console.log(err)
     }
-    return products
+
+    return products[id]
   }
 
-  static async getProduct (id) {
-    const list = await this.fetchAll()
-    const product = list.find(x => x.id === Number(id))
-    return product
+  static async deleteProduct (id) {
+    const index = await this.getProductIndex(id)
+    products.splice(index, 1)
+
+    try {
+      await writeFile(filePath, JSON.stringify(products))
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  static async getProductIndex (id) {
+    await this.fetchAll()
+    const index = products.findIndex(x => x.id === id)
+    return index
   }
 }
 

@@ -1,3 +1,4 @@
+const Products = require('../models/product')
 const Product = require('../models/product')
 
 exports.index = (req, res) => {
@@ -16,9 +17,22 @@ exports.getProductList = async (req, res) => {
   res.render('admin/product-list', { list })
 }
 
-exports.editProduct = async (req, res) => {
+exports.getEditProduct = async (req, res) => {
   const { productId } = req.params
   const product = await Product.getProduct(productId)
-  console.log(product)
   return res.render('admin/edit-product', { product })
+}
+
+exports.editProduct = async (req, res) => {
+  const data = req.body
+  const id = req.params.productId
+  const product = await Product.updateProduct(id, data)
+  return res.redirect(`/admin/edit-product`)
+}
+
+exports.deleteProduct = async (req, res) => {
+  const data = req.body
+  const id = req.params.productId
+  const product = await Product.deleteProduct(id, data)
+  return res.redirect(`/admin/edit-product`)
 }
