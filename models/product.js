@@ -49,7 +49,7 @@ class Products {
 
   static async getProduct (id) {
     const list = await this.fetchAll()
-    const product = list.find(x => x.id === id)
+    const product = list.find(x => Number(x.id) === Number(id))
     return product
   }
 
