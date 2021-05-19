@@ -27,6 +27,16 @@ class Cart {
     }
     await writeFile(filePath, JSON.stringify(cart))
   }
+
+  static async fetchAll () {
+    try {
+      const res = await readFilePath()
+      return JSON.parse(res)
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
 }
 
 module.exports = Cart
