@@ -7,21 +7,23 @@ class Products {
     this.description = description
   }
 
-  static async fetchAll () {
-    const [res, tableInfo ] = await db.execute('SELECT * FROM products')
-    return res
+  static fetchAll () {
+    return db.execute('SELECT * FROM products')
   }
 
-  async save () {
-
+  save () {
+    return db.execute(
+      'INSERT INTO products (title, description, price, img_url) VALUES (?, ?, ?, ?)',
+      [this.title, this.description, this.price, this.img]
+    )
   }
 
   async addProduct () {
 
   }
 
-  static async getProduct (id) {
-
+  static getProduct (id) {
+    return db.execute('SELECT * FROM products WHERE products.id = ?', [id])
   }
 
   static async updateProduct (id, data) {

@@ -5,11 +5,16 @@ exports.index = (req, res) => {
   return res.render('admin/add-product')
 }
 
-exports.addProduct = (req, res) => {
+exports.addProduct = async (req, res) => {
   const { title, img, price, description } = req.body
   const item = new Product(title, img, price, description)
-  item.save()
-  res.redirect('/')
+
+  try {
+    await item.save()
+    res.redirect('/')
+  } catch(e) {
+    console.log(e)
+  }
 }
 
 exports.getProductList = async (req, res) => {
