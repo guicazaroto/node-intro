@@ -2,8 +2,9 @@ const Product = require('../models/product')
 const Cart = require('../models/cart')
 
 exports.index = async (req, res) => {
-  const [rows, fieldData] = await Product.fetchAll()
-  return res.render('shop/product-list', { products: rows })
+  const products = await Product.findAll()
+  console.log(products)
+  return res.render('shop/product-list', { products })
 }
 
 exports.getCarts = async (req, res) => {
