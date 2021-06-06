@@ -1,3 +1,6 @@
 const app = require('./app')
+const db = require('./utils/database')
 
-app.listen(3000, '0.0.0.0')
+db.sync().then(() =>
+  app.listen(3000, '0.0.0.0')
+)
