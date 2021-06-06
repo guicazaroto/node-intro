@@ -1,4 +1,3 @@
-const Products = require('../models/product')
 const Product = require('../models/product')
 
 exports.index = (req, res) => {
@@ -7,10 +6,15 @@ exports.index = (req, res) => {
 
 exports.addProduct = async (req, res) => {
   const { title, img, price, description } = req.body
-  const item = new Product(title, img, price, description)
 
   try {
-    await item.save()
+    await Product.create({
+      title,
+      price,
+      description,
+      imageUrl: img
+    })
+    
     res.redirect('/')
   } catch(e) {
     console.log(e)
