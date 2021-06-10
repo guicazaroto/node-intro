@@ -3,7 +3,6 @@ const Cart = require('../models/cart')
 
 exports.index = async (req, res) => {
   const products = await Product.findAll()
-  console.log(products)
   return res.render('shop/product-list', { products })
 }
 
@@ -17,7 +16,7 @@ const getProductsInCart = async () => {
   const cart = await Cart.fetchAll()
   
   return cart.map(item => {
-    const {id, title, description} = products
+    const { id, title, description } = products
       .find(x => Number(x.id) === Number(item.id))
 
     return {
@@ -32,8 +31,8 @@ const getProductsInCart = async () => {
 
 exports.getProductDetail = async (req, res) => {
   const { productId } = req.params
-  const [ product ] = await Product.getProduct(productId)
-  return res.render('shop/product-detail', {product: product[0]})
+  const product = await Product.findOne({ where: { id: productId } })
+  return res.render('shop/product-detail', { product })
 }
 
 exports.addToCart = (req, res) => {
