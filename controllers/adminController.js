@@ -22,26 +22,50 @@ exports.addProduct = async (req, res) => {
 }
 
 exports.getProductList = async (req, res) => {
-  const list = await Product.fetchAll()
-  res.render('admin/product-list', { list })
+
+  try {
+    const list = await Product.findAll()
+    res.render('admin/product-list', { list })
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 exports.getEditProduct = async (req, res) => {
   const { productId } = req.params
-  const product = await Product.getProduct(productId)
-  return res.render('admin/edit-product', { product })
+
+  try {
+    const product = await Product.findOne({ id: productId })
+    return res.render('admin/edit-product', { product })
+  } catch(err) {
+    console.log(err)
+  }
 }
 
 exports.editProduct = async (req, res) => {
   const data = req.body
   const id = req.params.productId
-  const product = await Product.updateProduct(id, data)
-  return res.redirect(`/admin/edit-product`)
+  console.log(data)
+  try {
+    const product = await Product.update(data, {
+      where: {
+        id
+      }
+    })
+
+    return res.redirect(`/admin/edit-product`)
+  } catch(err) {
+    console.log(err)
+  }
 }
 
 exports.deleteProduct = async (req, res) => {
-  const data = req.body
   const id = req.params.productId
-  const product = await Product.deleteProduct(id, data)
-  return res.redirect(`/admin/edit-product`)
+
+  try {
+    const product = await Product.destroy({ where: { id } })
+    return res.redirect(`/admin/edit-product`)
+  } catch(err) {
+    console.log(err)
+  }
 }
