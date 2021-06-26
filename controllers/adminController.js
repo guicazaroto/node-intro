@@ -1,4 +1,5 @@
 const Product = require('../models/product')
+const User = require('../models/user')
 
 exports.index = (req, res) => {
   return res.render('admin/add-product')
@@ -6,9 +7,10 @@ exports.index = (req, res) => {
 
 exports.addProduct = async (req, res) => {
   const { title, img, price, description } = req.body
+  const user = await User.findByPk(1) 
 
   try {
-    await Product.create({
+    await user.createProduct({ // this method just exists by association
       title,
       price,
       description,
