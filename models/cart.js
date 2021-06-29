@@ -7,8 +7,7 @@ const Cart = connection.define('cart', {
       allowNull: false,
       autoIncrement: true,
       primaryKey: true
-    },
-    quantity: DataTypes.INTEGER
+    }
   }
 )
 

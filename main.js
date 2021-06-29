@@ -4,13 +4,17 @@ const db = require('./utils/database')
 const User = require('./models/user')
 const Product = require('./models/product')
 const Cart = require('./models/cart')
-const CartItem = require('./models/cart-item')
+const CartItem = require('./models/cartItem')
 
+// User.create({ name: 'Guilherme', email: 'gui.cazaroto@gmail.com'})
+// User.findByPk(1).then(user => user.createCart())
+
+User.hasOne(Cart)
+User.hasMany(Product)
 
 Product.belongsTo(User, { onDelete: 'CASCADE' })
-User.hasMany(Product)
-User.hasOne(Cart)
 Cart.belongsTo(User)
+
 Cart.belongsToMany(Product, { through: CartItem })
 Product.belongsToMany(Cart, { through: CartItem })
 
