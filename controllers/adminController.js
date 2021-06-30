@@ -7,7 +7,7 @@ exports.index = (req, res) => {
 
 exports.addProduct = async (req, res) => {
   const { title, img, price, description } = req.body
-  const user = await User.findByPk(1) 
+  const { user } = req
 
   try {
     await user.createProduct({ // this method just exists by association

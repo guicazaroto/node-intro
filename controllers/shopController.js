@@ -12,10 +12,9 @@ exports.index = async (req, res) => {
 }
 
 exports.getCartProducts = async (req, res) => {
-  const user = await User.findByPk(1)
+  const { user } = req
   const cart = await user.getCart()
   const products = await cart.getProducts()
-  console.log(products[0].cartItem)
   return res.render('shop/cart', { products })
 }
 
@@ -33,10 +32,10 @@ exports.getProductDetail = async (req, res) => {
 
 exports.addToCart = async (req, res) => {
   const { productId } = req.body
-  const user = await User.findByPk(1)
+  const { user } = req
   const product = await Product.findByPk(productId)
   const userCart = await user.getCart()
 
   await userCart.addProduct(product, { through: { quantity: 1 } } )
-  // return res.redirect(302, '/cart')
+  return res.redirect(302, '/cart')
 }

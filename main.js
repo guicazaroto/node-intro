@@ -6,9 +6,6 @@ const Product = require('./models/product')
 const Cart = require('./models/cart')
 const CartItem = require('./models/cartItem')
 
-// User.create({ name: 'Guilherme', email: 'gui.cazaroto@gmail.com'})
-// User.findByPk(1).then(user => user.createCart())
-
 User.hasOne(Cart)
 User.hasMany(Product)
 
