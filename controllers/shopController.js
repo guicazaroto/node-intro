@@ -39,3 +39,12 @@ exports.addToCart = async (req, res) => {
   await userCart.addProduct(product, { through: { quantity: 1 } } )
   return res.redirect(302, '/cart')
 }
+
+exports.removeFromCart = async (req, res) => {
+  const productId = req.body.product
+  const cart = await req.user.getCart()
+  const products = await cart.getProducts({ where: { id: productId } })
+  await products[0].cartItem.destroy()
+
+  return res.redirect(302, '/cart')
+}

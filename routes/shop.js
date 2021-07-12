@@ -6,6 +6,7 @@ const shopController = require('../controllers/shopController')
 router.get('/',  shopController.index)
 router.get('/product/:productId', shopController.getProductDetail)
 router.get('/cart', shopController.getCartProducts)
-router.post('/add-to-cart', shopController.addToCart)
+router.post('/cart/add', shopController.addToCart)
+router.post('/cart/remove', shopController.removeFromCart)
 
 module.exports = router

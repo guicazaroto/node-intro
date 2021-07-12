@@ -47,7 +47,7 @@ exports.getEditProduct = async (req, res) => {
 exports.editProduct = async (req, res) => {
   const data = req.body
   const id = req.params.productId
-  console.log(data)
+
   try {
     const product = await Product.update(data, {
       where: {
