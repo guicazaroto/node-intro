@@ -11,7 +11,7 @@
         <%= product.description %>
       </p>
       <form action="/cart/add" method="POST">
-        <button class="btn btn-success" type="submit">Comprar</button>
+        <button class="btn btn-success" type="submit">Adicionar ao carrinho</button>
         <input name="productId" type="hidden" value="<%= product.id %>">
       </form>
     </div>
